@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import NavBarCom from "./components/NavBar";
-// import { Container } from "react-bootstrap";
 import axios from "axios";
 import CardList from "./components/CardList";
 import BoardList from "./components/BoardList";
 import CreateBoard from "./components/CreateBoard";
 import "./App.css";
 
-const URL = "https://guarded-savannah-52656.herokuapp.com";
+const URL = process.env.REACT_APP_DATABASE_URL;
 
 function App() {
   const [boards, setBoards] = useState([]);
@@ -22,10 +20,10 @@ function App() {
     getBoards();
   }, []);
 
-  console.log(selectedBoard);
   const getBoards = async () => {
     try {
       const res = await axios.get(`${URL}/boards`);
+
       setBoards(res.data);
       setLoading(true);
     } catch (err) {
@@ -94,7 +92,7 @@ function App() {
                     loading={loading}
                     boards={boards}
                     deleteBoard={deleteBoard}
-                    getBoardData={getBoardData}
+                    callBoardData={getBoardData}
                   />
                 </ol>
               </section>

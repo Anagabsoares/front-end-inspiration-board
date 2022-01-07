@@ -9,7 +9,6 @@ const CreateCard = ({ addCardCallback, board }) => {
     message: "",
     board_id: "",
   });
-  console.log(newCardData);
 
   const inputValid = () => {
     return newCardData.message.length <= 40 && newCardData.message.length >= 3;
@@ -30,8 +29,7 @@ const CreateCard = ({ addCardCallback, board }) => {
     // console.log("me");
     // create a new card
     addCardCallback(newCardData);
-    // reset state
-    console.log("me");
+
     setNewCardData({
       ...newCardData,
       message: "",
@@ -47,7 +45,7 @@ const CreateCard = ({ addCardCallback, board }) => {
       </h4>
 
       <form onSubmit={onSubmit} className="new-card-form-form">
-        <label htmlFor="message">Message</label>
+        <label htmlfor="message">Message</label>
         <input
           type="text"
           className={!inputValid() ? "invalid-form-input" : "none"}
@@ -67,8 +65,8 @@ const CreateCard = ({ addCardCallback, board }) => {
   );
 };
 
+export default CreateCard;
+
 CreateCard.propTypes = {
   addCardCallback: PropTypes.func.isRequired,
 };
-
-export default CreateCard;

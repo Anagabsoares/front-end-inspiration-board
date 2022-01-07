@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Board = ({ board, deleteBoard, getBoardData }) => {
+const Board = ({ board, deleteBoard, callBoardData }) => {
   const sendData = (event) => {
-    getBoardData(board);
+    callBoardData(board);
     event.preventDefault();
   };
 
@@ -28,7 +28,7 @@ const Board = ({ board, deleteBoard, getBoardData }) => {
 export default Board;
 
 Board.propTypes = {
-  getBoardData: PropTypes.func.isRequired,
+  callBoardData: PropTypes.func.isRequired,
   deleteBoard: PropTypes.func.isRequired,
   board: PropTypes.object.isRequired,
 };
