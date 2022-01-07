@@ -1,15 +1,14 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import Card from "./Card";
+import PropTypes from "prop-types";
+import axios from "axios";
 import CreateCard from "./CreateCard";
+import Card from "./Card";
 import "./CardList.css";
 
 const URL = "https://guarded-savannah-52656.herokuapp.com";
 
 const CardList = ({ board }) => {
   const [cards, setCards] = useState([]);
-
-  console.log(board.id);
 
   // useEffect((boardId) => {
   //   getCards(boardId);
@@ -63,8 +62,6 @@ const CardList = ({ board }) => {
   };
 
   const updateLikes = (id) => {
-    console.log(id);
-    console.log(cards);
     const newCards = cards.map((card) => {
       if (card.card_id === id) {
         card.likes_count += 1;
@@ -78,7 +75,6 @@ const CardList = ({ board }) => {
   };
 
   const addCard = ({ message, board_id }) => {
-    console.log(board_id);
     axios
       .post(`${URL}/boards/${board_id}/cards`, {
         message: message,
@@ -113,7 +109,7 @@ const CardList = ({ board }) => {
       <section>
         <h2 className="playful" aria-label="PICK ME">
           <span aria-hidden="true">
-            {board.title ? board.title : "Pick me"}
+            {board.title ? board.title : "Pick a board"}
           </span>
         </h2>
         <div className="cards-item-container">{cardsItems}</div>
@@ -124,3 +120,7 @@ const CardList = ({ board }) => {
 };
 
 export default CardList;
+
+CardList.propTypes = {
+  board: PropTypes.object.isRequired,
+};

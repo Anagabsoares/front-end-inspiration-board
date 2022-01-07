@@ -7,7 +7,7 @@
 .card-item {
     font-family: "Homemade Apple", cursive;
     font-family: 'Concert One', cursive;
-    background-color: rgb(255, 248, 165);
+    background-color: #ffd166;
     box-shadow: -10px 7px 7px lightgrey;
     min-height: 200px;
     display: flex;
@@ -37,19 +37,6 @@ div{
     display: block
 }
 
-.card-item {
-    font-family: "Homemade Apple", cursive;
-    font-family: 'Concert One', cursive;
-    background-color: rgb(255, 248, 165);
-    box-shadow: -10px 7px 7px lightgrey;
-    min-height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    flex-direction: column;
-}
-
 
 .card-item-message {
     text-align: center;
@@ -66,3 +53,4 @@ div{
     margin-left: 5%;
     padding-bottom: 0%
 }
+

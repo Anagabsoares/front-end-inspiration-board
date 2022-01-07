@@ -4,7 +4,7 @@
 body {
   margin: 3rem;
   font-family: 'Open Sans', sans-serif;
-  color: #267A9E;
+  color: #118ab2;
 }
 
 p{  font-family: 'Open Sans', sans-serif;
@@ -14,13 +14,13 @@ p{  font-family: 'Open Sans', sans-serif;
 h1{
   font-size:30px;
   font-family: 'Righteous', cursive;
-  color:#51A885;
+  color: #ef476f;
   
   letter-spacing: 5px;
-  -webkit-text-stroke: .25px #51A885;
+  -webkit-text-stroke: .25px ef476f;
   font-weight: bold;
   padding-left: 20px;
-  border: 2px solid #73AD21;
+  border: 2px solid #ef476f;
   border-radius: 25px;
 
 }
@@ -38,20 +38,18 @@ h4{
 h5{
   font-size:26px;
   font-family: 'Righteous', cursive;
-  color:#51A885;
-  border: 2px solid #73AD21;
+  color:#ef476f;
+  border: 2px solid #ef476f;
   border-radius: 25px;
   padding-left: 10px;
- 
   font-weight: bold;
 
 }
 
 
-
-
 footer {
   text-align: center;
+
 }
 
 .page-container {
@@ -74,7 +72,7 @@ footer {
   min-height: 9rem;
   overflow: scroll;
   margin-right: 2rem;
-  border: #73AD21 solid 1px;
+  border: gray solid 1px;
 }
 
 .new-board-form-container{
@@ -102,47 +100,14 @@ input {
   box-sizing: content-box;
 }
 
-.invalid-form-input {
-  border: #DB7476 solid 1px;
-  box-shadow: 0 0 7px #DB7476;
-}
+
 
 .playful span {
-  position: relative;
-  color: #267a9e;
-  animation: scatter 1.75s infinite;
-}
-.playful span:nth-child(6n+1) {
-  color: #51a885;
-  animation-delay: 0.3s;
-}
-.playful span:nth-child(6n+2) {
-  color: #f5a936;
-  animation-delay: 0.15s;
-}
-.playful span:nth-child(6n+3) {
-  color: #986b9b;
-  animation-delay: 0.4s;
-}
-.playful span:nth-child(6n+4) {
-  color: #ed8c37;
+  color: #06d6a0;
+  font-weight: bold;
   animation-delay: 0.25s;
 }
-.playful span:nth-child(6n+5) {
-  color: #db7476;
-  animation-delay: 0.25s;
-}
-@keyframes scatter {
-  0% {
-    top: 0;
-}
-  50% {
-    top: -10px;
-}
-  50% {
-    top: 0;
-}
-}
+
 
 
 

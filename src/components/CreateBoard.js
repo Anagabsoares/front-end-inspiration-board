@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import "./CreateBoard.css";
 
-const CreateBoard = (props) => {
+const CreateBoard = (addBoardCallback, hideBoard) => {
   const [formFields, setFormFields] = useState({
     title: "",
     owner: "",
@@ -25,7 +25,7 @@ const CreateBoard = (props) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    props.addBoardCallback({
+    addBoardCallback({
       titleData: formFields.title,
       ownerData: formFields.owner,
     });
@@ -34,7 +34,7 @@ const CreateBoard = (props) => {
       owner: "",
       title: "",
     });
-    props.hideBoard();
+    hideBoard();
   };
 
   const inputValid = () => {
