@@ -1,14 +1,15 @@
 import Board from "./Board";
-import "./Board.css";
+import PropTypes from "prop-types";
 import "./BoardList.css";
+import "./Board.css";
 
-const BoardList = ({ boards, loading, deleteBoard, onClickCall }) => {
+const BoardList = ({ boards, deleteBoard, getBoardData }) => {
   const board = boards.map((board) => {
     return (
       <Board
         board={board}
         deleteBoard={deleteBoard}
-        onClickCall={onClickCall}
+        getBoardData={getBoardData}
       />
     );
   });
@@ -17,3 +18,9 @@ const BoardList = ({ boards, loading, deleteBoard, onClickCall }) => {
 };
 
 export default BoardList;
+
+BoardList.propTypes = {
+  getBoardData: PropTypes.func.isRequired,
+  deleteBoard: PropTypes.func.isRequired,
+  boards: PropTypes.array.isRequired,
+};

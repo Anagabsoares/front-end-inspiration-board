@@ -12,7 +12,6 @@ const URL = "https://guarded-savannah-52656.herokuapp.com";
 function App() {
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [visibleCardForm, setVisibleCardForm] = useState(false);
   const [selectedBoard, setSelectedBoard] = useState({
     board_id: "",
     owner: "",
@@ -33,8 +32,6 @@ function App() {
       alert(err.message);
     }
   };
-
-  // console.log(boards[0].id);
 
   const addBoard = (newBoard) => {
     axios
@@ -63,19 +60,20 @@ function App() {
         setBoards(newBoard);
       })
       .catch((error) => {
+        alert("Sorry, we can't delete this board");
         console.log(error);
       });
   };
 
-  const toggleState = () => {
-    if (visibleCardForm === false) {
-      setVisibleCardForm(true);
-    } else {
-      setVisibleCardForm(false);
-    }
-  };
+  // const toggleState = () => {
+  //   if (visibleCardForm === false) {
+  //     setVisibleCardForm(true);
+  //   } else {
+  //     setVisibleCardForm(false);
+  //   }
+  // };
 
-  const handleCallback = (board_data) => {
+  const getBoardData = (board_data) => {
     setSelectedBoard(board_data);
   };
 
@@ -91,12 +89,12 @@ function App() {
                 <h2 className="playful" aria-label="BOARDS">
                   <span aria-hidden="true">BOARDS</span>
                 </h2>
-                <ol className="boards-list" onClick={() => toggleState()}>
+                <ol className="boards-list">
                   <BoardList
                     loading={loading}
                     boards={boards}
                     deleteBoard={deleteBoard}
-                    onClickCall={handleCallback}
+                    getBoardData={getBoardData}
                   />
                 </ol>
               </section>
