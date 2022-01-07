@@ -1,15 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const Board = ({ board, deleteBoard }) => {
+const Board = ({ board, deleteBoard, onClickCall }) => {
+  const sendData = (event) => {
+    onClickCall(board);
+    event.preventDefault();
+  };
+
   return (
-    <section>
+    <section onClick={sendData}>
       <li>{`${board.title}`}</li>
-
-      <div>
-        <strong>Owner:</strong>
-        {board.owner}
-      </div>
-
+      <li>by {board.owner}</li>
       <button
         onClick={() => {
           deleteBoard(board.id);

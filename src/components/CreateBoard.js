@@ -36,10 +36,14 @@ const CreateBoard = (props) => {
     props.hideBoard();
   };
 
+  const inputValid = () => {
+    return formFields.owner.length >= 3 && formFields.title.length >= 3;
+  };
+
   return (
     <form id="board-form" onSubmit={onFormSubmit}>
-      <div class="form-group">
-        <h4 class="playful" aria-label="CREATE NEW BOARD">
+      <div className="form-group">
+        <h4 className="playful" aria-label="CREATE NEW BOARD">
           <span aria-hidden="true">C</span>
           <span aria-hidden="true">R</span>
           <span aria-hidden="true">E</span>
@@ -58,23 +62,25 @@ const CreateBoard = (props) => {
           <span aria-hidden="true">D</span>
         </h4>
 
-        <label for="title">Title</label>
+        <label hmtlFor="title">Title</label>
         <div>
           <input
             type="text"
             value={formFields.title}
             onChange={onTitleChange}
+            className={!inputValid() ? "invalid-form-input" : "none"}
           />
         </div>
         <div>
-          <label for="owner">Owner</label>
+          <label hmtlFor="owner">Owner</label>
           <input
             type="text"
             value={formFields.owner}
             onChange={onOwnerChange}
+            className={!inputValid() ? "invalid-form-input" : "none"}
           />
         </div>
-        <input type="submit" value="add board" />
+        <input type="submit" value="add board" disabled={!inputValid()} />
       </div>
     </form>
   );

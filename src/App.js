@@ -7,18 +7,24 @@ import BoardList from "./components/BoardList";
 import CreateBoard from "./components/CreateBoard";
 import "./App.css";
 
-const URL = "https://kinder-code.herokuapp.com";
+const URL = "https://guarded-savannah-52656.herokuapp.com";
 
 function App() {
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showBoardForm, setShowBoardForm] = useState(false);
   const [visibleCardForm, setVisibleCardForm] = useState(false);
+  const [selectedBoard, setSelectedBoard] = useState({
+    board_id: "",
+    owner: "",
+    title: "",
+  });
 
   useEffect(() => {
     getBoards();
   }, []);
 
+  console.log(selectedBoard);
   const getBoards = async () => {
     try {
       const res = await axios.get(`${URL}/boards`);
@@ -41,7 +47,7 @@ function App() {
         const newBoard = {
           owner: response.data.owner,
           title: response.data.title,
-          board_id: response.data.id,
+          id: response.data.id,
         };
         setBoards([...boards, newBoard]);
       })
@@ -74,16 +80,20 @@ function App() {
     }
   };
 
+  const handleCallback = (board_data) => {
+    setSelectedBoard(board_data);
+  };
+
   return (
     <body>
       <div className="App">
-        <div class="page-container">
-          <div class="content-container">
-            <h1>Inspiration Board</h1>
+        <div className="page-container">
+          <div className="content-container">
+            <h1>Inspiration Board </h1>
 
-            <section class="boards-container">
+            <section className="boards-container">
               <section>
-                <h2 class="playful" aria-label="BOARDS">
+                <h2 className="playful" aria-label="BOARDS">
                   <span aria-hidden="true">B</span>
                   <span aria-hidden="true">O</span>
                   <span aria-hidden="true">A</span>
@@ -91,27 +101,26 @@ function App() {
                   <span aria-hidden="true">D</span>
                   <span aria-hidden="true">S</span>
                 </h2>
-                <ol class="boards-list">
+                <ol className="boards-list" onClick={() => toggleState()}>
                   <BoardList
                     loading={loading}
                     boards={boards}
                     deleteBoard={deleteBoard}
+                    onClickCall={handleCallback}
                   />
                 </ol>
               </section>
 
               <section id="selected-boards-section">
-                <h3 class="playful" aria-label="SELECT NEW BOARD">
+                <h3 className="playful" aria-label="SELECT NEW BOARD">
                   <span aria-hidden="true">S</span>
                   <span aria-hidden="true">E</span>
                   <span aria-hidden="true">L</span>
                   <span aria-hidden="true">E</span>
                   <span aria-hidden="true">C</span>
                   <span aria-hidden="true">T</span>
-                  <span aria-hidden="true"> </span>
-                  <span aria-hidden="true">N</span>
                   <span aria-hidden="true">E</span>
-                  <span aria-hidden="true">W</span>
+                  <span aria-hidden="true">D</span>
                   <span aria-hidden="true"> </span>
                   <span aria-hidden="true">B</span>
                   <span aria-hidden="true">O</span>
@@ -119,21 +128,33 @@ function App() {
                   <span aria-hidden="true">R</span>
                   <span aria-hidden="true">D</span>
                 </h3>
-                <p>Select a Board from the Board List!</p>
+
+                <p>
+                  {selectedBoard.id
+                    ? `${selectedBoard.title} - ${selectedBoard.owner}`
+                    : "Select a Board from the Board List!"}
+                </p>
               </section>
 
-              <section class="new-board-form-container">
+              <section className="new-board-form-container">
                 <CreateBoard
                   addBoardCallback={addBoard}
                   hideBoard={hideBoardForm}
                 />
-                <span class="new-board-form-toggle-btn">
+                <span className="new-board-form-toggle-btn">
                   Hide New Board Form
                 </span>
               </section>
             </section>
           </div>
-          <section>{visibleCardForm ? <CardList /> : null}</section>
+          <section>
+            {selectedBoard.id ? (
+              <CardList board={selectedBoard}></CardList>
+            ) : (
+              ""
+            )}
+          </section>
+
           <footer>
             <span>This is a demo! Please be gentle!</span>
           </footer>

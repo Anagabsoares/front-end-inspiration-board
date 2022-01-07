@@ -4,29 +4,51 @@ import Card from "./Card";
 import CreateCard from "./CreateCard";
 import "./CardList.css";
 
-const URL = "https://kinder-code.herokuapp.com";
+const URL = "https://guarded-savannah-52656.herokuapp.com";
 
-const CardList = (props) => {
+const CardList = ({ board }) => {
   const [cards, setCards] = useState([]);
 
+  console.log(board.id);
+
+  // useEffect((boardId) => {
+  //   getCards(boardId);
+  // }, []);
+
+  // useEffect((boardId) => {
+  //   getCards(boardId);
+  // }, []);
+
+  // const getCards = (id) =>
+  //   axios
+  //     .get(`${URL}/boards/${id}/cards`)
+  //     .then((res) => {
+  //       const newCards = res.data.map((card) => {
+  //         return {
+  //           card_id: card.card_id,
+  //           message: card.message,
+  //           likes_count: card.likes_count,
+  //           board_id: card.board_id,
+  //         };
+  //       });
+  //       setCards(newCards);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+
+  console.log(board);
   useEffect(() => {
     axios
-      .get(`${URL}/cards`)
-      .then((res) => {
-        const newCards = res.data.map((card) => {
-          return {
-            card_id: card.card_id,
-            message: card.message,
-            likes_count: card.likes_count,
-            board_id: card.board_id,
-          };
-        });
-        setCards(newCards);
+      .get(`${URL}/boards/${board.id}/cards`)
+      .then((response) => {
+        setCards(response.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log("Error:", error);
+        alert("sorry!! This board has no cards");
       });
-  }, []);
+  }, [board]);
 
   const deleteCard = (id) => {
     axios
@@ -41,6 +63,8 @@ const CardList = (props) => {
   };
 
   const updateLikes = (id) => {
+    console.log(id);
+    console.log(cards);
     const newCards = cards.map((card) => {
       if (card.card_id === id) {
         card.likes_count += 1;
@@ -54,12 +78,12 @@ const CardList = (props) => {
   };
 
   const addCard = ({ message, board_id }) => {
-    board_id = 26;
+    console.log(board_id);
     axios
       .post(`${URL}/boards/${board_id}/cards`, {
-        message,
+        message: message,
         likes_count: 0,
-        board_id,
+        board_id: board_id,
       })
       .then((res) => {
         const newCard = {
@@ -87,7 +111,7 @@ const CardList = (props) => {
   return (
     <section className="cards-container">
       <section>
-        <h2 class="playful" aria-label="PICK ME">
+        <h2 className="playful" aria-label="PICK ME">
           <span aria-hidden="true">P</span>
           <span aria-hidden="true">I</span>
           <span aria-hidden="true">C</span>
@@ -98,7 +122,7 @@ const CardList = (props) => {
         </h2>
         <div className="cards-item-container">{cardsItems}</div>
       </section>
-      <CreateCard addCardCallback={addCard}></CreateCard>
+      <CreateCard addCardCallback={addCard} board={board}></CreateCard>
     </section>
   );
 };

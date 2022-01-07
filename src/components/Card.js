@@ -1,30 +1,24 @@
 import "./Card.css";
 
-const URL = "https://kinder-code.herokuapp.com";
-
 const Card = (props) => {
   return (
     <div className="card-item">
       <p className="card-item-message">{props.card.message}</p>
       <ul className="card-options">
-        <li>
-          <p className="likes-count">💕{props.card.likes_count}</p>
+        <li className="likes-count card-options">
+          {props.card.likes_count} 💕
         </li>
-        <li>
-          <p
-            className="click-for-like"
-            onClick={() => props.updateLikes(props.card.card_id)}
-          >
-            +1
-          </p>
+        <li
+          className="click-for-like card-options"
+          onClick={() => props.updateLikes(props.card.card_id)}
+        >
+          +1
         </li>
-        <li>
-          <p
-            className="click-to-delete"
-            onClick={() => props.deleteCard(props.card.card_id)}
-          >
-            Delete
-          </p>
+        <li
+          className="click-to-delete card-options"
+          onClick={() => props.deleteCard(props.card.card_id)}
+        >
+          Delete
         </li>
       </ul>
     </div>

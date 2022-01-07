@@ -56,3 +56,9 @@ div{
     font-size: 1.4rem;
     word-break: break-word;
 }
+
+.card-options{
+    display: inline;
+    align-items: end;
+    margin: 5% ;
+}

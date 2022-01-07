@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 
 import "./CreateCard.css";
 
-const CreateCard = ({ addCardCallback }) => {
+const CreateCard = ({ addCardCallback, board }) => {
   // get id from clickEvent on board , pass this value as board_id
-
   const [newCardData, setNewCardData] = useState({
     message: "",
+    board_id: "",
   });
+  console.log(newCardData);
 
   const inputValid = () => {
     return newCardData.message.length <= 40 && newCardData.message.length >= 3;
@@ -16,8 +17,8 @@ const CreateCard = ({ addCardCallback }) => {
 
   const onMessageChange = (event) => {
     setNewCardData({
-      ...newCardData,
       message: event.target.value,
+      board_id: board.id,
     });
   };
 
@@ -30,14 +31,16 @@ const CreateCard = ({ addCardCallback }) => {
     // create a new card
     addCardCallback(newCardData);
     // reset state
+    console.log("me");
     setNewCardData({
+      ...newCardData,
       message: "",
     });
   };
 
   return (
     <section className="new-card-form-container">
-      <h4 class="playful" aria-label="CREATE NEW BOARD">
+      <h4 className="playful" aria-label="CREATE NEW BOARD">
         <span aria-hidden="true">CREATE </span>
         <span aria-hidden="true">NEW </span>
         <span aria-hidden="true">CARD </span>
