@@ -8,7 +8,6 @@ const URL = "https://kinder-code.herokuapp.com";
 
 const CardList = (props) => {
   const [cards, setCards] = useState([]);
-  const [visibleCardForm, setVisibleCardForm] = useState(false);
 
   useEffect(() => {
     axios
@@ -74,14 +73,6 @@ const CardList = (props) => {
       .catch((err) => console.log(err.response.data));
   };
 
-  const toggleState = () => {
-    if (visibleCardForm === false) {
-      setVisibleCardForm(true);
-    } else {
-      setVisibleCardForm(false);
-    }
-  };
-
   const cardsItems = cards.map((card) => {
     console.log(card.message);
     return (
@@ -96,7 +87,6 @@ const CardList = (props) => {
   return (
     <section className="cards-container">
       <section>
-        {/* {visibleCardForm ? <CreateCard addCardCallback={addCard} /> : null} */}
         <h2 class="playful" aria-label="PICK ME">
           <span aria-hidden="true">P</span>
           <span aria-hidden="true">I</span>

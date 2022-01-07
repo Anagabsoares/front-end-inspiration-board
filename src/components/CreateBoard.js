@@ -22,7 +22,6 @@ const CreateBoard = (props) => {
   };
 
   const onFormSubmit = (event) => {
-    console.log("clicked");
     event.preventDefault();
 
     props.addBoardCallback({
@@ -40,24 +39,40 @@ const CreateBoard = (props) => {
   return (
     <form id="board-form" onSubmit={onFormSubmit}>
       <div class="form-group">
-        <label class="form-label mt-4">Create A Board</label>
-        <div class="form-floating mb-3">
+        <h4 class="playful" aria-label="CREATE NEW BOARD">
+          <span aria-hidden="true">C</span>
+          <span aria-hidden="true">R</span>
+          <span aria-hidden="true">E</span>
+          <span aria-hidden="true">A</span>
+          <span aria-hidden="true">T</span>
+          <span aria-hidden="true">E</span>
+          <span aria-hidden="true"> </span>
+          <span aria-hidden="true">N</span>
+          <span aria-hidden="true">E</span>
+          <span aria-hidden="true">W</span>
+          <span aria-hidden="true"> </span>
+          <span aria-hidden="true">B</span>
+          <span aria-hidden="true">O</span>
+          <span aria-hidden="true">A</span>
+          <span aria-hidden="true">R</span>
+          <span aria-hidden="true">D</span>
+        </h4>
+
+        <label for="title">Title</label>
+        <div>
           <input
-            class="form-control"
-            id="floatingInput"
+            type="text"
             value={formFields.title}
             onChange={onTitleChange}
           />
-          <label for="floatingInput">Title</label>
         </div>
-        <div class="form-floating">
+        <div>
+          <label for="owner">Owner</label>
           <input
-            class="form-control"
-            id="floatingPassword"
+            type="text"
             value={formFields.owner}
             onChange={onOwnerChange}
           />
-          <label for="floatingPassword">Owner</label>
         </div>
         <input type="submit" value="add board" />
       </div>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import { Container } from "react-bootstrap";
 import axios from "axios";
 import CardList from "./components/CardList";
-import Boards from "./components/Boards";
+import BoardList from "./components/BoardList";
 import CreateBoard from "./components/CreateBoard";
 import "./App.css";
 
@@ -13,6 +13,7 @@ function App() {
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showBoardForm, setShowBoardForm] = useState(false);
+  const [visibleCardForm, setVisibleCardForm] = useState(false);
 
   useEffect(() => {
     getBoards();
@@ -28,7 +29,7 @@ function App() {
     }
   };
 
-  console.log(boards[0].id);
+  // console.log(boards[0].id);
 
   const addBoard = (newBoard) => {
     axios
@@ -37,7 +38,12 @@ function App() {
         owner: newBoard.ownerData,
       })
       .then(function (response) {
-        console.log(response);
+        const newBoard = {
+          owner: response.data.owner,
+          title: response.data.title,
+          board_id: response.data.id,
+        };
+        setBoards([...boards, newBoard]);
       })
       .catch(function (error) {
         console.log(error);
@@ -45,13 +51,29 @@ function App() {
   };
 
   const deleteBoard = async (id) => {
-    console.log("delete");
-    await axios.delete(`${URL}/boards/${id}`);
+    axios
+      .delete(`${URL}/boards/${id}`)
+      .then((response) => {
+        const newBoard = boards.filter((board) => board.id !== id);
+        setBoards(newBoard);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const hideBoardForm = () => {
     return setShowBoardForm(false);
   };
+
+  const toggleState = () => {
+    if (visibleCardForm === false) {
+      setVisibleCardForm(true);
+    } else {
+      setVisibleCardForm(false);
+    }
+  };
+
   return (
     <body>
       <div className="App">
@@ -70,7 +92,11 @@ function App() {
                   <span aria-hidden="true">S</span>
                 </h2>
                 <ol class="boards-list">
-                  <li> Pick me up!</li>
+                  <BoardList
+                    loading={loading}
+                    boards={boards}
+                    deleteBoard={deleteBoard}
+                  />
                 </ol>
               </section>
 
@@ -97,45 +123,17 @@ function App() {
               </section>
 
               <section class="new-board-form-container">
-                <h4 class="playful" aria-label="CREATE NEW BOARD">
-                  <span aria-hidden="true">C</span>
-                  <span aria-hidden="true">R</span>
-                  <span aria-hidden="true">E</span>
-                  <span aria-hidden="true">A</span>
-                  <span aria-hidden="true">T</span>
-                  <span aria-hidden="true">E</span>
-                  <span aria-hidden="true"> </span>
-                  <span aria-hidden="true">N</span>
-                  <span aria-hidden="true">E</span>
-                  <span aria-hidden="true">W</span>
-                  <span aria-hidden="true"> </span>
-                  <span aria-hidden="true">B</span>
-                  <span aria-hidden="true">O</span>
-                  <span aria-hidden="true">A</span>
-                  <span aria-hidden="true">R</span>
-                  <span aria-hidden="true">D</span>
-                </h4>
-                <form class="new-board-form">
-                  <label>Title</label>
-                  <input type="text" class="invalid-form-input" value="" />
-                  <label>Owner's Name</label>
-                  <input type="text" class="invalid-form-input" value="" />
-                  <p>Preview: - </p>
-                  <input
-                    type="Submit"
-                    disabled=""
-                    class="new-board-form-submit-btn"
-                  />
-                </form>
+                <CreateBoard
+                  addBoardCallback={addBoard}
+                  hideBoard={hideBoardForm}
+                />
                 <span class="new-board-form-toggle-btn">
                   Hide New Board Form
                 </span>
               </section>
             </section>
           </div>
-          <section>
-            <CardList />
-          </section>
+          <section>{visibleCardForm ? <CardList /> : null}</section>
           <footer>
             <span>This is a demo! Please be gentle!</span>
           </footer>

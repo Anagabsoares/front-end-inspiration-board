@@ -1,33 +1,24 @@
-// import React from "react";
-// import { Button, Card } from "react-bootstrap";
+import React from "react";
 
-// const Board = ({ board, deleteBoard }) => {
-//   return (
-//     <>
-//       <Card className="my-3 p-3 rounded h-90">
-//         <Card.Body>
-//           <Card.Title>{`${board.title}`}</Card.Title>
-//           <Card.Text>
-//             <div>
-//               <strong>Owner:</strong>
-//               {board.owner}
-//             </div>
-//           </Card.Text>
+const Board = ({ board, deleteBoard }) => {
+  return (
+    <section>
+      <li>{`${board.title}`}</li>
 
-//           <Button
-//             onClick={() => {
-//               deleteBoard(board.id);
-//             }}
-//             style={{ borderRadius: "20px" }}
-//             className="w-100"
-//             variant="secondary"
-//           >
-//             Delete
-//           </Button>
-//         </Card.Body>
-//       </Card>
-//     </>
-//   );
-// };
+      <div>
+        <strong>Owner:</strong>
+        {board.owner}
+      </div>
 
-// export default Board;
+      <button
+        onClick={() => {
+          deleteBoard(board.id);
+        }}
+      >
+        Delete
+      </button>
+    </section>
+  );
+};
+
+export default Board;
