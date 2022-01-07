@@ -1,3 +1,21 @@
 .invalid-form-input {
-    border: red solid 1px;
-    box-shadow: 0 0 7px red;}
+    border:#ed8c37 solid 1px;
+    box-shadow: 0 0 7px #ed8c37;}
+
+    
+input {
+        box-sizing: content-box;
+        width: 100%;
+    }
+    
+
+label{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: right;
+    width: 100%;
+    line-height: 26px;
+    margin-bottom: 5px
+}
+   ;

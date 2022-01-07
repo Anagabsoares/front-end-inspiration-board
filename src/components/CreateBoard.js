@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import "./CreateBoard.css";
 
 const CreateBoard = (props) => {
   const [formFields, setFormFields] = useState({
@@ -44,22 +45,9 @@ const CreateBoard = (props) => {
     <form id="board-form" onSubmit={onFormSubmit}>
       <div className="form-group">
         <h4 className="playful" aria-label="CREATE NEW BOARD">
-          <span aria-hidden="true">C</span>
-          <span aria-hidden="true">R</span>
-          <span aria-hidden="true">E</span>
-          <span aria-hidden="true">A</span>
-          <span aria-hidden="true">T</span>
-          <span aria-hidden="true">E</span>
-          <span aria-hidden="true"> </span>
-          <span aria-hidden="true">N</span>
-          <span aria-hidden="true">E</span>
-          <span aria-hidden="true">W</span>
-          <span aria-hidden="true"> </span>
-          <span aria-hidden="true">B</span>
-          <span aria-hidden="true">O</span>
-          <span aria-hidden="true">A</span>
-          <span aria-hidden="true">R</span>
-          <span aria-hidden="true">D</span>
+          <span aria-hidden="true">Create </span>
+          <span aria-hidden="true">New </span>
+          <span aria-hidden="true">Board</span>
         </h4>
 
         <label hmtlFor="title">Title</label>
@@ -80,7 +68,15 @@ const CreateBoard = (props) => {
             className={!inputValid() ? "invalid-form-input" : "none"}
           />
         </div>
-        <input type="submit" value="add board" disabled={!inputValid()} />
+
+        <button
+          type="submit"
+          className="new-card-form-submit-btn"
+          value="add board"
+          disabled={!inputValid()}
+        >
+          add board
+        </button>
       </div>
     </form>
   );

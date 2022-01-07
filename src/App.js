@@ -12,7 +12,6 @@ const URL = "https://guarded-savannah-52656.herokuapp.com";
 function App() {
   const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showBoardForm, setShowBoardForm] = useState(false);
   const [visibleCardForm, setVisibleCardForm] = useState(false);
   const [selectedBoard, setSelectedBoard] = useState({
     board_id: "",
@@ -68,10 +67,6 @@ function App() {
       });
   };
 
-  const hideBoardForm = () => {
-    return setShowBoardForm(false);
-  };
-
   const toggleState = () => {
     if (visibleCardForm === false) {
       setVisibleCardForm(true);
@@ -94,12 +89,7 @@ function App() {
             <section className="boards-container">
               <section>
                 <h2 className="playful" aria-label="BOARDS">
-                  <span aria-hidden="true">B</span>
-                  <span aria-hidden="true">O</span>
-                  <span aria-hidden="true">A</span>
-                  <span aria-hidden="true">R</span>
-                  <span aria-hidden="true">D</span>
-                  <span aria-hidden="true">S</span>
+                  <span aria-hidden="true">BOARDS</span>
                 </h2>
                 <ol className="boards-list" onClick={() => toggleState()}>
                   <BoardList
@@ -113,20 +103,8 @@ function App() {
 
               <section id="selected-boards-section">
                 <h3 className="playful" aria-label="SELECT NEW BOARD">
-                  <span aria-hidden="true">S</span>
-                  <span aria-hidden="true">E</span>
-                  <span aria-hidden="true">L</span>
-                  <span aria-hidden="true">E</span>
-                  <span aria-hidden="true">C</span>
-                  <span aria-hidden="true">T</span>
-                  <span aria-hidden="true">E</span>
-                  <span aria-hidden="true">D</span>
-                  <span aria-hidden="true"> </span>
-                  <span aria-hidden="true">B</span>
-                  <span aria-hidden="true">O</span>
-                  <span aria-hidden="true">A</span>
-                  <span aria-hidden="true">R</span>
-                  <span aria-hidden="true">D</span>
+                  <span aria-hidden="true">SELECTED </span>
+                  <span aria-hidden="true">BOARD</span>
                 </h3>
 
                 <p>
@@ -137,13 +115,7 @@ function App() {
               </section>
 
               <section className="new-board-form-container">
-                <CreateBoard
-                  addBoardCallback={addBoard}
-                  hideBoard={hideBoardForm}
-                />
-                <span className="new-board-form-toggle-btn">
-                  Hide New Board Form
-                </span>
+                <CreateBoard addBoardCallback={addBoard} />
               </section>
             </section>
           </div>

@@ -13,16 +13,16 @@
 }
 .new-card-form-submit-btn {
     padding: 0.5em;
-    background-color: white;
-    border: 2px solid black;
+    background-color: purple transparent;
+    border: 2px solid #986b9b;
     width: 100%;
 
 }
-
-input {
-    box-sizing: content-box;
-    width: 100%;
+.new-card-form-submit-btn:hover{
+    background:#986b9b;
 }
+
+
 
 input[type="submit" i] {
     appearance: auto;
@@ -43,5 +43,5 @@ input[type="submit" i] {
 
 
 .invalid-form-input {
-    border: red solid 1px;
-    box-shadow: 0 0 7px red;}
+    border:#ed8c37 solid 1px;
+    box-shadow: 0 0 7px #ed8c37;}

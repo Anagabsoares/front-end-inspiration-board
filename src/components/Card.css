@@ -58,7 +58,11 @@ div{
 }
 
 .card-options{
+    font-family: sans-serif;
+    color: navy;
     display: inline;
-    align-items: end;
-    margin: 5% ;
+    align-items: bottom;
+    width: 100%;
+    margin-left: 5%;
+    padding-bottom: 0%
 }

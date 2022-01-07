@@ -112,13 +112,9 @@ const CardList = ({ board }) => {
     <section className="cards-container">
       <section>
         <h2 className="playful" aria-label="PICK ME">
-          <span aria-hidden="true">P</span>
-          <span aria-hidden="true">I</span>
-          <span aria-hidden="true">C</span>
-          <span aria-hidden="true">K</span>
-          <span aria-hidden="true"> </span>
-          <span aria-hidden="true">M</span>
-          <span aria-hidden="true">E</span>
+          <span aria-hidden="true">
+            {board.title ? board.title : "Pick me"}
+          </span>
         </h2>
         <div className="cards-item-container">{cardsItems}</div>
       </section>

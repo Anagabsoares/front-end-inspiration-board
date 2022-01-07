@@ -7,6 +7,9 @@ body {
   color: #267A9E;
 }
 
+p{  font-family: 'Open Sans', sans-serif;
+
+}
 
 h1{
   font-size:30px;
@@ -136,7 +139,7 @@ input {
   50% {
     top: -10px;
 }
-  100% {
+  50% {
     top: 0;
 }
 }
