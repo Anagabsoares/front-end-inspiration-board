@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import "./CreateBoard.css";
 
-const CreateBoard = (addBoardCallback, hideBoard) => {
+const CreateBoard = ({ addBoardCallback, hideBoard }) => {
   const [formFields, setFormFields] = useState({
     title: "",
     owner: "",
@@ -24,17 +24,20 @@ const CreateBoard = (addBoardCallback, hideBoard) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
+    console.log(formFields);
+    console.log(addBoardCallback);
 
-    addBoardCallback({
+    const newBoard = {
       titleData: formFields.title,
       ownerData: formFields.owner,
-    });
+    };
+
+    addBoardCallback(newBoard);
 
     setFormFields({
       owner: "",
       title: "",
     });
-    hideBoard();
   };
 
   const inputValid = () => {
@@ -50,7 +53,7 @@ const CreateBoard = (addBoardCallback, hideBoard) => {
           <span aria-hidden="true">Board</span>
         </h4>
 
-        <label hmtlFor="title">Title</label>
+        <label htmlFor="title">Title</label>
         <div>
           <input
             type="text"
@@ -60,7 +63,7 @@ const CreateBoard = (addBoardCallback, hideBoard) => {
           />
         </div>
         <div>
-          <label hmtlFor="owner">Owner</label>
+          <label htmlFor="owner">Owner</label>
           <input
             type="text"
             value={formFields.owner}
@@ -82,9 +85,8 @@ const CreateBoard = (addBoardCallback, hideBoard) => {
   );
 };
 
+export default CreateBoard;
+
 CreateBoard.propTypes = {
   addBoardCallback: PropTypes.func.isRequired,
-  hideBoard: PropTypes.func.isRequired,
 };
-
-export default CreateBoard;

@@ -5,38 +5,11 @@ import CreateCard from "./CreateCard";
 import Card from "./Card";
 import "./CardList.css";
 
-const URL = "https://guarded-savannah-52656.herokuapp.com";
+const URL = process.env.REACT_APP_DATABASE_URL;
 
 const CardList = ({ board }) => {
   const [cards, setCards] = useState([]);
 
-  // useEffect((boardId) => {
-  //   getCards(boardId);
-  // }, []);
-
-  // useEffect((boardId) => {
-  //   getCards(boardId);
-  // }, []);
-
-  // const getCards = (id) =>
-  //   axios
-  //     .get(`${URL}/boards/${id}/cards`)
-  //     .then((res) => {
-  //       const newCards = res.data.map((card) => {
-  //         return {
-  //           card_id: card.card_id,
-  //           message: card.message,
-  //           likes_count: card.likes_count,
-  //           board_id: card.board_id,
-  //         };
-  //       });
-  //       setCards(newCards);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-
-  console.log(board);
   useEffect(() => {
     axios
       .get(`${URL}/boards/${board.id}/cards`)
@@ -94,13 +67,13 @@ const CardList = ({ board }) => {
   };
 
   const cardsItems = cards.map((card) => {
-    console.log(card.message);
     return (
       <Card
+        key={card.card_id}
         card={card}
         updateLikes={updateLikes}
         deleteCard={deleteCard}
-      ></Card>
+      />
     );
   });
 

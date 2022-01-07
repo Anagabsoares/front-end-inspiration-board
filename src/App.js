@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-// import NavBarCom from "./components/NavBar";
-// import { Container } from "react-bootstrap";
 import axios from "axios";
 import CardList from "./components/CardList";
 import BoardList from "./components/BoardList";
 import CreateBoard from "./components/CreateBoard";
 import "./App.css";
 
-const URL = "https://guarded-savannah-52656.herokuapp.com";
+const URL = process.env.REACT_APP_DATABASE_URL;
 
 function App() {
   const [boards, setBoards] = useState([]);
@@ -22,7 +20,6 @@ function App() {
     getBoards();
   }, []);
 
-  console.log(selectedBoard);
   const getBoards = async () => {
     try {
       const res = await axios.get(`${URL}/boards`);
@@ -34,6 +31,7 @@ function App() {
   };
 
   const addBoard = (newBoard) => {
+    console.log(newBoard);
     axios
       .post(`${URL}/boards`, {
         title: newBoard.titleData,
@@ -94,7 +92,7 @@ function App() {
                     loading={loading}
                     boards={boards}
                     deleteBoard={deleteBoard}
-                    getBoardData={getBoardData}
+                    callBoardData={getBoardData}
                   />
                 </ol>
               </section>
@@ -105,7 +103,7 @@ function App() {
                   <span aria-hidden="true">BOARD</span>
                 </h3>
 
-                <p>
+                <p className="select-board">
                   {selectedBoard.id
                     ? `${selectedBoard.title} - ${selectedBoard.owner}`
                     : "Select a Board from the Board List!"}
@@ -113,7 +111,10 @@ function App() {
               </section>
 
               <section className="new-board-form-container">
-                <CreateBoard addBoardCallback={addBoard} />
+                <CreateBoard
+                  addBoardCallback={addBoard}
+                  hideBoard={() => console.log("hide")}
+                />
               </section>
             </section>
           </div>
@@ -125,9 +126,7 @@ function App() {
             )}
           </section>
 
-          <footer>
-            <span>This is a demo! Please be gentle!</span>
-          </footer>
+          <footer>&copy; Copyright 2022 HTML.am</footer>
         </div>
       </div>
     </body>
