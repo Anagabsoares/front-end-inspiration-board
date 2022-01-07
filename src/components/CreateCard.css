@@ -13,35 +13,17 @@
 }
 .new-card-form-submit-btn {
     padding: 0.5em;
-    background-color: white;
-    border: 2px solid black;
+    background-color: purple transparent;
+    border: 2px solid #986b9b;
     width: 100%;
 
 }
-
-input {
-    box-sizing: content-box;
-    width: 100%;
+.new-card-form-submit-btn:hover{
+    background:#986b9b;
 }
 
-input[type="submit" i] {
-    appearance: auto;
-    user-select: none;
-    white-space: pre;
-    align-items: flex-start;
-    text-align: center;
-    cursor: default;
-    box-sizing: border-box;
-    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
-    color: -internal-light-dark(black, white);
-    padding: 1px 6px;
-    border-width: 2px;
-    border-style: outset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-}
 
 
 .invalid-form-input {
-    border: red solid 1px;
-    box-shadow: 0 0 7px red;}
+    border:#ef476f solid 1px;
+    box-shadow: 0 0 7px #ef476f;}

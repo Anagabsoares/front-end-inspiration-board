@@ -1,33 +1,55 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 body {
   margin: 3rem;
   font-family: 'Open Sans', sans-serif;
-  color: black;
+  color: #118ab2;
 }
 
-h1,
+p{  font-family: 'Open Sans', sans-serif;
+
+}
+
+h1{
+  font-size:30px;
+  font-family: 'Righteous', cursive;
+  color: #ef476f;
+  
+  letter-spacing: 5px;
+  -webkit-text-stroke: .25px ef476f;
+  font-weight: bold;
+  padding-left: 20px;
+  border: 2px solid #ef476f;
+  border-radius: 25px;
+
+}
 h2,
 h3,
-h4 {
+h4{
   font-size: x-large;
-  font-family: "Permanent Marker", cursive;
   padding: 0.6em 1em;
-  display: inline-block;
-  color: black;
+  text-transform: uppercase;
+  font-family: "Archivo Black", "Archivo", sans-serif;
+  font-weight: normal;
+  display: block;
 }
 
-h1 {
-  background-color: yellow;
-  transform: rotate(-5deg) skew(-10deg);
-}
+h5{
+  font-size:26px;
+  font-family: 'Righteous', cursive;
+  color:#ef476f;
+  border: 2px solid #ef476f;
+  border-radius: 25px;
+  padding-left: 10px;
+  font-weight: bold;
 
-h2, h3, h4 {
-  border: 2px solid black;
-  box-shadow: -15px 7px 1px black;
 }
 
 
 footer {
   text-align: center;
+
 }
 
 .page-container {
@@ -50,7 +72,7 @@ footer {
   min-height: 9rem;
   overflow: scroll;
   margin-right: 2rem;
-  border: black solid 1px;
+  border: gray solid 1px;
 }
 
 .new-board-form-container{
@@ -59,7 +81,8 @@ footer {
   align-items: flex-start;
 }
 
-.new-board-form{
+.new-board-form,
+.new-card-form{
   display: flex;
   flex-direction: column;
   margin-bottom: 2em;
@@ -70,16 +93,21 @@ footer {
 .new-board-form-toggle-btn{
   padding: 0.5em;
   background-color: white;
-  border: 2px solid black;
+  border: 2px solid #73AD21;
 }
 
 input {
   box-sizing: content-box;
-  width: 100%;
 }
 
-.invalid-form-input {
-  border: red solid 1px;
-  box-shadow: 0 0 7px red;
+
+
+.playful span {
+  color: #06d6a0;
+  font-weight: bold;
+  animation-delay: 0.25s;
 }
+
+
+
 

@@ -1,0 +1,12 @@
+.button-delete{
+    border:none;
+    margin-bottom: 3%;
+}
+
+.button-delete:hover{
+    background-color: gray;
+}
+
+.board-items{
+    margin: 1%;
+}

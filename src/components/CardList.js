@@ -1,33 +1,53 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import Card from "./Card";
+import PropTypes from "prop-types";
+import axios from "axios";
 import CreateCard from "./CreateCard";
+import Card from "./Card";
 import "./CardList.css";
 
-const URL = "https://kinder-code.herokuapp.com";
+const URL = "https://guarded-savannah-52656.herokuapp.com";
 
-const CardList = (props) => {
+const CardList = ({ board }) => {
   const [cards, setCards] = useState([]);
-  const [visibleCardForm, setVisibleCardForm] = useState(false);
 
+  // useEffect((boardId) => {
+  //   getCards(boardId);
+  // }, []);
+
+  // useEffect((boardId) => {
+  //   getCards(boardId);
+  // }, []);
+
+  // const getCards = (id) =>
+  //   axios
+  //     .get(`${URL}/boards/${id}/cards`)
+  //     .then((res) => {
+  //       const newCards = res.data.map((card) => {
+  //         return {
+  //           card_id: card.card_id,
+  //           message: card.message,
+  //           likes_count: card.likes_count,
+  //           board_id: card.board_id,
+  //         };
+  //       });
+  //       setCards(newCards);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+
+  console.log(board);
   useEffect(() => {
     axios
-      .get(`${URL}/cards`)
-      .then((res) => {
-        const newCards = res.data.map((card) => {
-          return {
-            card_id: card.card_id,
-            message: card.message,
-            likes_count: card.likes_count,
-            board_id: card.board_id,
-          };
-        });
-        setCards(newCards);
+      .get(`${URL}/boards/${board.id}/cards`)
+      .then((response) => {
+        setCards(response.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log("Error:", error);
+        alert("sorry!! This board has no cards");
       });
-  }, []);
+  }, [board]);
 
   const deleteCard = (id) => {
     axios
@@ -55,12 +75,11 @@ const CardList = (props) => {
   };
 
   const addCard = ({ message, board_id }) => {
-    board_id = 26;
     axios
       .post(`${URL}/boards/${board_id}/cards`, {
-        message,
+        message: message,
         likes_count: 0,
-        board_id,
+        board_id: board_id,
       })
       .then((res) => {
         const newCard = {
@@ -72,14 +91,6 @@ const CardList = (props) => {
         setCards([...cards, newCard]);
       })
       .catch((err) => console.log(err.response.data));
-  };
-
-  const toggleState = () => {
-    if (visibleCardForm === false) {
-      setVisibleCardForm(true);
-    } else {
-      setVisibleCardForm(false);
-    }
   };
 
   const cardsItems = cards.map((card) => {
@@ -96,13 +107,20 @@ const CardList = (props) => {
   return (
     <section className="cards-container">
       <section>
-        {/* {visibleCardForm ? <CreateCard addCardCallback={addCard} /> : null} */}
-        <h2>Pick me up</h2>
+        <h2 className="playful" aria-label="PICK ME">
+          <span aria-hidden="true">
+            {board.title ? board.title : "Pick a board"}
+          </span>
+        </h2>
         <div className="cards-item-container">{cardsItems}</div>
       </section>
-      <CreateCard addCardCallback={addCard}></CreateCard>
+      <CreateCard addCardCallback={addCard} board={board}></CreateCard>
     </section>
   );
 };
 
 export default CardList;
+
+CardList.propTypes = {
+  board: PropTypes.object.isRequired,
+};

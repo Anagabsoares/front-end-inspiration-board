@@ -1,62 +1,130 @@
 import React, { useState, useEffect } from "react";
+// import NavBarCom from "./components/NavBar";
+// import { Container } from "react-bootstrap";
 import axios from "axios";
 import CardList from "./components/CardList";
+import BoardList from "./components/BoardList";
+import CreateBoard from "./components/CreateBoard";
 import "./App.css";
 
-const URL = "https://kinder-code.herokuapp.com";
+const URL = "https://guarded-savannah-52656.herokuapp.com";
 
 function App() {
-  /// CREATE NEW BOARD- (TEXT INPUTS----TITLE, OWNER NAME) SUBMIT BUTTON
-  //CREATE NEW CARDS - CREATE NEW CARD- (TEXT INPUTS----MESSAGE) SUBMIT BUTTON
+  const [boards, setBoards] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedBoard, setSelectedBoard] = useState({
+    board_id: "",
+    owner: "",
+    title: "",
+  });
 
-  ///BOARDS- DINAMIC TEXT LIST( LIST OF BOARDS---EACH BOARD TITLE IS BUTTON)
-  //SELECTED BOARD- WHEN BOARD TITLE CLICKED IN BOARDS---- DISPLAYS THE TITLE OF BOARD
+  useEffect(() => {
+    getBoards();
+  }, []);
 
-  ///DISPLAY CARDS--- SHOWS NAME OF SELECTED BOARD--- SHOWS CARDS( LIKED(DIPLAYS LIKES), DELETED)
+  console.log(selectedBoard);
+  const getBoards = async () => {
+    try {
+      const res = await axios.get(`${URL}/boards`);
+      setBoards(res.data);
+      setLoading(true);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const addBoard = (newBoard) => {
+    axios
+      .post(`${URL}/boards`, {
+        title: newBoard.titleData,
+        owner: newBoard.ownerData,
+      })
+      .then(function (response) {
+        const newBoard = {
+          owner: response.data.owner,
+          title: response.data.title,
+          id: response.data.id,
+        };
+        setBoards([...boards, newBoard]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const deleteBoard = async (id) => {
+    axios
+      .delete(`${URL}/boards/${id}`)
+      .then((response) => {
+        const newBoard = boards.filter((board) => board.id !== id);
+        setBoards(newBoard);
+      })
+      .catch((error) => {
+        alert("Sorry, we can't delete this board");
+        console.log(error);
+      });
+  };
+
+  // const toggleState = () => {
+  //   if (visibleCardForm === false) {
+  //     setVisibleCardForm(true);
+  //   } else {
+  //     setVisibleCardForm(false);
+  //   }
+  // };
+
+  const getBoardData = (board_data) => {
+    setSelectedBoard(board_data);
+  };
 
   return (
     <body>
       <div className="App">
-        <div class="page-container">
-          <div class="content-container">
-            <h1>Inspiration Board</h1>
+        <div className="page-container">
+          <div className="content-container">
+            <h1>Inspiration Board </h1>
 
-            <section class="boards-container">
+            <section className="boards-container">
               <section>
-                <h2>Boards</h2>
-                <ol class="boards-list">
-                  <li> Pick me up!</li>
+                <h2 className="playful" aria-label="BOARDS">
+                  <span aria-hidden="true">BOARDS</span>
+                </h2>
+                <ol className="boards-list">
+                  <BoardList
+                    loading={loading}
+                    boards={boards}
+                    deleteBoard={deleteBoard}
+                    getBoardData={getBoardData}
+                  />
                 </ol>
               </section>
 
               <section id="selected-boards-section">
-                <h3>Selected Board</h3>
-                <p>Select a Board from the Board List!</p>
+                <h3 className="playful" aria-label="SELECT NEW BOARD">
+                  <span aria-hidden="true">SELECTED </span>
+                  <span aria-hidden="true">BOARD</span>
+                </h3>
+
+                <p>
+                  {selectedBoard.id
+                    ? `${selectedBoard.title} - ${selectedBoard.owner}`
+                    : "Select a Board from the Board List!"}
+                </p>
               </section>
 
-              <section class="new-board-form-container">
-                <h4>Create a New Board</h4>
-                <form class="new-board-form">
-                  <label>Title</label>
-                  <input type="text" class="invalid-form-input" value="" />
-                  <label>Owner's Name</label>
-                  <input type="text" class="invalid-form-input" value="" />
-                  <p>Preview: - </p>
-                  <input
-                    type="Submit"
-                    disabled=""
-                    class="new-board-form-submit-btn"
-                  />
-                </form>
-                <span class="new-board-form-toggle-btn">
-                  Hide New Board Form
-                </span>
+              <section className="new-board-form-container">
+                <CreateBoard addBoardCallback={addBoard} />
               </section>
             </section>
           </div>
           <section>
-            <CardList />
+            {selectedBoard.id ? (
+              <CardList board={selectedBoard}></CardList>
+            ) : (
+              ""
+            )}
           </section>
+
           <footer>
             <span>This is a demo! Please be gentle!</span>
           </footer>

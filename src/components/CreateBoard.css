@@ -1,0 +1,20 @@
+.invalid-form-input {
+    border:#ef476f solid 1px;
+    box-shadow: 0 0 7px #ef476f;} 
+
+input {
+        box-sizing: content-box;
+        width: 100%;
+    }
+    
+
+label{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: right;
+    width: 100%;
+    line-height: 26px;
+    margin-bottom: 5px
+};
+
