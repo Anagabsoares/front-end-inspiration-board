@@ -45,7 +45,7 @@ const CreateCard = ({ addCardCallback, board }) => {
       </h4>
 
       <form onSubmit={onSubmit} className="new-card-form-form">
-        <label htmlFor="message">Message</label>
+        <label boards="message">Message</label>
         <input
           type="text"
           className={!inputValid() ? "invalid-form-input" : "none"}

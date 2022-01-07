@@ -14,13 +14,12 @@ p{  font-family: 'Open Sans', sans-serif;
 h1{
   font-size:30px;
   font-family: 'Righteous', cursive;
-  color: #ef476f;
-  
+  color: #06d6a0;;
   letter-spacing: 5px;
   -webkit-text-stroke: .25px ef476f;
   font-weight: bold;
   padding-left: 20px;
-  border: 2px solid #ef476f;
+  border: 2px solid #06d6a0;;
   border-radius: 25px;
 
 }
@@ -108,6 +107,16 @@ input {
   animation-delay: 0.25s;
 }
 
+.boards-list{
+  background-color: white;
+}
+
+.select-board{
+  background-color: white;
+  height: 40%;
+  width: 80%;
+  font-size: 150%;
+}
 
 
 

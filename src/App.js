@@ -23,7 +23,6 @@ function App() {
   const getBoards = async () => {
     try {
       const res = await axios.get(`${URL}/boards`);
-
       setBoards(res.data);
       setLoading(true);
     } catch (err) {
@@ -32,6 +31,7 @@ function App() {
   };
 
   const addBoard = (newBoard) => {
+    console.log(newBoard);
     axios
       .post(`${URL}/boards`, {
         title: newBoard.titleData,
@@ -103,7 +103,7 @@ function App() {
                   <span aria-hidden="true">BOARD</span>
                 </h3>
 
-                <p>
+                <p className="select-board">
                   {selectedBoard.id
                     ? `${selectedBoard.title} - ${selectedBoard.owner}`
                     : "Select a Board from the Board List!"}
@@ -111,7 +111,10 @@ function App() {
               </section>
 
               <section className="new-board-form-container">
-                <CreateBoard addBoardCallback={addBoard} />
+                <CreateBoard
+                  addBoardCallback={addBoard}
+                  hideBoard={() => console.log("hide")}
+                />
               </section>
             </section>
           </div>
@@ -123,9 +126,7 @@ function App() {
             )}
           </section>
 
-          <footer>
-            <span>This is a demo! Please be gentle!</span>
-          </footer>
+          <footer>&copy; Copyright 2022 HTML.am</footer>
         </div>
       </div>
     </body>
